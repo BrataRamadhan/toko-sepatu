@@ -16,7 +16,7 @@
                       <img class="d-block w-100" src="https://placehold.it/900x500/f39c12/ffffff&text=I+Love+Bootstrap" alt="Third slide">
 					</div> -->
 					<div>
-                      <img class="d-block w-100" src="<?php base_url() ?>assets/sneakers.png">
+                      <img class="d-block w-100" src="<?php echo base_url() ?>assets/sneakers.png">
                     </div>
 				  </div>
 				  <br>
@@ -49,7 +49,7 @@
                       </ul>
                     </div>
                     <div class="col-5 text-center">
-                      <img src="<?php base_url() ?>template/dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
+                      <img src="<?php echo base_url() ?>template/dist/img/user1-128x128.jpg" alt="" class="img-circle img-fluid">
                     </div>
                   </div>
                 </div>
