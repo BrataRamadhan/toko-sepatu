@@ -73,13 +73,13 @@
             </a>
 		  </li>
 		  <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?php echo base_url('user') ?>" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
               <p>User</p>
             </a>
 		  </li>
 		  <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="<?php echo base_url('auth/logout') ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>Log Out</p>
             </a>
@@ -98,12 +98,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
+            <h1 class="m-0 text-dark"><?php echo $title ?></h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
+              <li class="breadcrumb-item active"><?php echo $title ?></li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
