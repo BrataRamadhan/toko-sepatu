@@ -53,7 +53,9 @@
 									?>
 								</td>
 								<td>
-									<button class="btn btn-primary" data-toggle="modal" data-target="#edit"><i class="fas fa-edit"></i></button>
+									<button class="btn btn-primary" data-toggle="modal" data-target="#edit">
+										<i class="fas fa-edit"></i>
+									</button>
 									<button class="btn btn-danger"><i class="fas fa-trash"></i></button>
 								</td>
 							</tr>
@@ -111,51 +113,50 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	<?php foreach ($user as $user => $value) { ?>
-		<div class="modal fade" id="edit">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">Edit User</h4>
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					<div class="modal-body">
-						<?php
-						echo form_open('user/add');
-						?>
-						<div class="form-group">
-							<label for="">Nama User</label>
-							<input type="text" class="form-control" id="" name="nama_user" required>
-						</div>
-						<div class="form-group">
-							<label for="">Username</label>
-							<input type="text" class="form-control" id="" name="username" required>
-						</div>
-						<div class="form-group">
-							<label for="">Password</label>
-							<input type="text" class="form-control" id="" name="password" required>
-						</div>
-						<div class="form-group">
-							<label for="">Level User</label>
-							<select name="level_user" id="" class="form-control">
-								<option value="1" selected>Admin</option>
-								<option value="2">User</option>
-							</select>
-						</div>
-					</div>
-					<div class="modal-footer justify-content-between">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="submit" class="btn btn-primary">Save changes</button>
-					</div>
-					<?php
-					echo form_close();
-					?>
+
+	<div class="modal fade" id="edit">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Edit User</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
 				</div>
-				<!-- /.modal-content -->
+				<div class="modal-body">
+					<?php
+					echo form_open('user/add');
+					?>
+					<div class="form-group">
+						<label for="">Nama User</label>
+						<input type="text" class="form-control" id="" name="nama_user" required>
+					</div>
+					<div class="form-group">
+						<label for="">Username</label>
+						<input type="text" class="form-control" id="" name="username" required>
+					</div>
+					<div class="form-group">
+						<label for="">Password</label>
+						<input type="text" class="form-control" id="" name="password" required>
+					</div>
+					<div class="form-group">
+						<label for="">Level User</label>
+						<select name="level_user" id="" class="form-control">
+							<option value="1" selected>Admin</option>
+							<option value="2">User</option>
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer justify-content-between">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-primary">Save changes</button>
+				</div>
+				<?php
+				echo form_close();
+				?>
 			</div>
-			<!-- /.modal-dialog -->
+			<!-- /.modal-content -->
 		</div>
-		<!-- /.modal -->
-	<?php } ?>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
