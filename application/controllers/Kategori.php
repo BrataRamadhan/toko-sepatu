@@ -18,7 +18,7 @@ class Kategori extends CI_Controller
 	{
 		$data = array(
 			'title' => 'Kategori',
-			'kategori' => $this->m_kategori->getData(),
+			'data' => $this->m_kategori->getData(),
 			'contents' => 'v_kategori',
 		);
 		$this->load->view('layout/v_wrapper_beckend', $data, FALSE);
@@ -27,16 +27,33 @@ class Kategori extends CI_Controller
 	// Add a new item
 	public function add()
 	{
+		$data = array(
+			'nama_kategori' => $this->input->post('nama_kategori'),
+		);
+		$this->m_kategori->add($data);
+
+		$this->session->set_flashdata('pesan', 'Menambahkan data');
+		redirect('kategori');
 	}
 
 	//Update one item
-	public function update()
+	public function edit()
 	{
+		$data = array(
+			'id_kategori' => $this->input->post('id_kategori'),
+			'nama_kategori' => $this->input->post('nama_kategori'),
+		);
+		$this->m_kategori->edit($data);
+
+		$this->session->set_flashdata('pesan', 'Merubah data');
+		redirect('kategori');
 	}
 
 	//Delete one item
-	public function delete()
+	public function delete($id)
 	{
+		$this->m_kategori->delete($id);
+		redirect('kategori');
 	}
 }
 

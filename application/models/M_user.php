@@ -24,6 +24,12 @@ class M_user extends CI_Model
 		$this->db->where('id_user', $data['id_user']);
 		$this->db->update('tbl_user', $data);
 	}
+
+	function delete($id)
+	{
+		$this->db->where('id_user', $id);
+		$this->db->delete('tbl_user');
+	}
 }
 
 /* End of file ModelName.php */

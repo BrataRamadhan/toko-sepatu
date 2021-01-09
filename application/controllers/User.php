@@ -19,7 +19,7 @@ class User extends CI_Controller
 	{
 		$data = array(
 			'title' => 'User',
-			'user' => $this->m_user->getData(),
+			'data' => $this->m_user->getData(),
 			'contents' => 'v_user',
 		);
 		$this->load->view('layout/v_wrapper_beckend', $data, FALSE);
@@ -41,10 +41,10 @@ class User extends CI_Controller
 	}
 
 	//Update one item
-	public function edit($id_user)
+	public function edit()
 	{
 		$data = array(
-			'id_user' => $id_user,
+			'id_user' => $this->input->post('id_user'),
 			'nama_user' => $this->input->post('nama_user'),
 			'username' => $this->input->post('username'),
 			'password' => $this->input->post('password'),
@@ -57,8 +57,10 @@ class User extends CI_Controller
 	}
 
 	//Delete one item
-	public function delete()
+	public function delete($id)
 	{
+		$this->m_user->delete($id);
+		redirect('user');
 	}
 }
 

@@ -37,7 +37,7 @@
 
 						<?php
 						$no = 1;
-						foreach ($user as $user => $value) { ?>
+						foreach ($data as $user => $value) { ?>
 							<tr class="text-center">
 								<td><?php echo $no++ ?></td>
 								<td><?php echo $value->nama_user ?></td>
@@ -53,10 +53,10 @@
 									?>
 								</td>
 								<td>
-									<button class="btn btn-primary" data-toggle="modal" data-target="#edit">
+									<button class="btn btn-primary" data-toggle="modal" data-target="#edit<?php echo $value->id_user ?>">
 										<i class="fas fa-edit"></i>
 									</button>
-									<button class="btn btn-danger"><i class="fas fa-trash"></i></button>
+									<a href="<?= base_url(); ?>User/delete/<?= $value->id_user ?>" onclick="return confirm('yakin?')" class="btn btn-danger"><i class="fas fa-trash"></i></a>
 								</td>
 							</tr>
 						<?php } ?>
@@ -113,50 +113,53 @@
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
+	<?php foreach ($data as $user => $value) { ?>
+		<div class="modal fade" id="edit<?php echo $value->id_user ?>">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Edit User</h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<?php
+						echo form_open('User/edit', array('method' => 'post'));
 
-	<div class="modal fade" id="edit">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-title">Edit User</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
+						?>
+						<input type="hidden" class="form-control" name="id_user" value="<?= $value->id_user ?>">
+						<div class="form-group">
+							<label for="">Nama User</label>
+							<input type="text" class="form-control" id="" name="nama_user" required>
+						</div>
+						<div class="form-group">
+							<label for="">Username</label>
+							<input type="text" class="form-control" id="" name="username" required>
+						</div>
+						<div class="form-group">
+							<label for="">Password</label>
+							<input type="text" class="form-control" id="" name="password" required>
+						</div>
+						<div class="form-group">
+							<label for="">Level User</label>
+							<select name="level_user" id="" class="form-control">
+								<option value="1" selected>Admin</option>
+								<option value="2">User</option>
+							</select>
+						</div>
+					</div>
+					<div class="modal-footer justify-content-between">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" class="btn btn-primary">Save changes</button>
+					</div>
 					<?php
-					echo form_open('user/add');
+					echo form_close();
 					?>
-					<div class="form-group">
-						<label for="">Nama User</label>
-						<input type="text" class="form-control" id="" name="nama_user" required>
-					</div>
-					<div class="form-group">
-						<label for="">Username</label>
-						<input type="text" class="form-control" id="" name="username" required>
-					</div>
-					<div class="form-group">
-						<label for="">Password</label>
-						<input type="text" class="form-control" id="" name="password" required>
-					</div>
-					<div class="form-group">
-						<label for="">Level User</label>
-						<select name="level_user" id="" class="form-control">
-							<option value="1" selected>Admin</option>
-							<option value="2">User</option>
-						</select>
-					</div>
 				</div>
-				<div class="modal-footer justify-content-between">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="submit" class="btn btn-primary">Save changes</button>
-				</div>
-				<?php
-				echo form_close();
-				?>
+				<!-- /.modal-content -->
 			</div>
-			<!-- /.modal-content -->
+			<!-- /.modal-dialog -->
 		</div>
-		<!-- /.modal-dialog -->
-	</div>
-	<!-- /.modal -->
+		<!-- /.modal -->
+	<?php } ?>
