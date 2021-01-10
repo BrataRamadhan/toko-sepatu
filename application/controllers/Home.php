@@ -13,7 +13,7 @@ class Home extends CI_Controller
 		$this->load->model('m_home');
 	}
 
-
+	//menampilkan halaman utama dan menampilkan data
 	public function index()
 	{
 		$data = array(
@@ -24,6 +24,7 @@ class Home extends CI_Controller
 		$this->load->view('layout/v_wrapper_frontend', $data, false);
 	}
 
+	//menampilkan halaman kategori dan menampilkan data
 	public function kategori($id_kategori)
 	{
 		$kategori = $this->m_home->kategori($id_kategori);

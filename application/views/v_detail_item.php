@@ -7,13 +7,6 @@
 				<div class="col-12">
 					<img src="<?php echo base_url('assets/image/' . $item->photo) ?>" class="product-image" alt="Product Image">
 				</div>
-				<!-- <div class="col-12 product-image-thumbs">
-					<div class="product-image-thumb active"><img src="../../dist/img/prod-1.jpg" alt="Product Image"></div>
-					<div class="product-image-thumb"><img src="../../dist/img/prod-2.jpg" alt="Product Image"></div>
-					<div class="product-image-thumb"><img src="../../dist/img/prod-3.jpg" alt="Product Image"></div>
-					<div class="product-image-thumb"><img src="../../dist/img/prod-4.jpg" alt="Product Image"></div>
-					<div class="product-image-thumb"><img src="../../dist/img/prod-5.jpg" alt="Product Image"></div>
-				</div> -->
 			</div>
 			<div class="col-12 col-sm-6">
 				<h3 class="my-3"><?php echo $item->item ?></h3>
@@ -25,35 +18,34 @@
 					</h2>
 				</div>
 				<hr>
-				<?php echo form_open('shooping/add');
-				echo form_hidden('id', $item->id_item);
-				echo form_hidden('price', $item->price);
-				echo form_hidden('name', $item->item);
-				echo form_hidden('redirect_page', str_replace('index.php/', '', current_url())); ?>
 
+				<form action="<?php echo base_url('shooping/add') ?> " method="post" accept-charset="utf-8">
+					<input type="hidden" name="id" value="<?php echo $item->id_item ?>">
+					<input type="hidden" name="price" value="<?php echo $item->price ?>">
+					<input type="hidden" name="name" value="<?php echo $item->item  ?>">
+					<input type="hidden" name="redirect_page" value="<?php echo str_replace('index.php/', '', current_url()); ?>">
 
-				<div class="mt-4">
-					<div class="row">
-						<div class="col-sm-2">
-							<input type="number" class="form-control" min="1">
-						</div>
-						<div class="col-sm-8">
-							<button type="submit" name="qty" class="btn btn-primary btn-lg btn-flat swalDefaultSuccess">
-								<i class="fas fa-cart-plus fa-lg mr-2"></i>
-								Add to Cart
-							</button>
+					<div class="mt-4">
+						<div class="row">
+							<div class="col-sm-2">
+								<input type="number" name="qty" class="form-control" min="1" value="1">
+							</div>
+							<div class="col-sm-8">
+								<button type="submit" class="btn btn-primary swalDefaultSuccess">
+									<i class="fas fa-cart-plus fa-lg mr-2"></i>
+									Add to Cart
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<?php echo form_close(); ?>
-
+				</form>
 			</div>
 		</div>
-
 	</div>
 	<!-- /.card-body -->
 </div>
 <script src="<?php echo base_url() ?>template/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script src="<?php echo base_url() ?>template/dist/js/demo.js"></script>
 <script type="text/javascript">
 	$(function() {
 		const Toast = Swal.mixin({

@@ -28,7 +28,7 @@ class Pelanggan extends CI_Controller
 		));
 		$this->form_validation->set_rules('ulangi_password', 'Ulangi password', 'required|matches[password]', array(
 			'required' => 'wajib diisi',
-			'matches' => 'Password salah'
+			'matches' => 'Password berbeda'
 		));
 
 		if ($this->form_validation->run() == FALSE) {

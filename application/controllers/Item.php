@@ -88,7 +88,6 @@ class Item extends CI_Controller
 				redirect('item');
 			}
 		}
-
 		$data = array(
 			'title' => 'Add Item',
 			'data' => $this->m_kategori->getData(),
@@ -163,7 +162,7 @@ class Item extends CI_Controller
 				$this->session->set_flashdata('pesan', 'Merubah data');
 				redirect('item');
 			}
-			//jika mengedit kecuali dengan gambar
+			// jika mengedit kecuali dengan gambar
 			$data = array(
 				'id_item' => $id_item,
 				'item' => $this->input->post('item'),

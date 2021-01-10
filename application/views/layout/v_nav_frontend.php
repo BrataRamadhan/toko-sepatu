@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
 	<div class="container">
 		<a href="<?php echo base_url() ?>" class="navbar-brand">
-			<span>Online Shop</span>
+			<span>kelompok magang</span>
 		</a>
 
 		<button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,10 +14,6 @@
 				<li class="nav-item">
 					<a href="<?php echo base_url() ?>" class="nav-link">Home</a>
 				</li>
-				<li class="nav-item">
-					<a href="#" class="nav-link">Kategori</a>
-				</li>
-
 				<?php $kategori = $this->m_home->getDataKategori(); ?>
 
 				<li class="nav-item dropdown">
@@ -47,7 +43,7 @@
 					<?php } else { ?>
 						<a class="nav-link" data-toggle="dropdown" href="#">
 							<span class="brand-text font-weight-light"><?php echo $this->session->userdata('nama_pelanggan') ?></span>
-							<img src="<?php echo base_url('assets/foto/' . $this->session->userdata('foto')) ?>" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
+							<!-- <img src="<?php echo base_url('assets/foto/' . $this->session->userdata('foto')) ?>" alt="" class="brand-image img-circle elevation-3" style="opacity: .8"> -->
 						</a>
 						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 							<div class="dropdown-divider"></div>
@@ -78,35 +74,45 @@
 						<span class="badge badge-danger navbar-badge"><?php echo $jml_item ?></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<?php foreach ($keranjang as $key => $value) { ?>
-							<!-- $item = $this->m_home->detailItem($value['id']); -->
+						<?php if (empty($keranjang)) { ?>
+							<a href="#" class="dropdown-item">
+								<p>Keranjang kosong</p>
+							</a>
+							<?php } else {
+							foreach ($keranjang as $key => $value) {
+								$item = $this->m_home->detailItem($value['id']);
 
-
+							?>
+								<a href="#" class="dropdown-item">
+									<div class="media">
+										<img src="<?php echo base_url('assets/image/' . $item->photo) ?>" alt="User Avatar" class="img-size-50 ">
+										<div class="media-body">
+											<h3 class="dropdown-item-title">
+												<?php echo $value['name'] ?>
+											</h3>
+											<p class="text-sm"><?php echo $value['qty'] ?> X <?php echo $value['price'] ?></p>
+											<p class="text-sm text-muted"><i class="far fa-calculator"></i><?php echo $this->cart->format_number($value['subtotal']) ?></p>
+										</div>
+									</div>
+								</a>
+								<div class="dropdown-divider"></div>
+							<?php } ?>
 							<a href="#" class="dropdown-item">
 								<div class="media">
-									<!-- <img src="<?php echo base_url('assets/image/' . $item->photo) ?>" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
 									<div class="media-body">
-										<h3 class="dropdown-item-title">
-											<?php echo $value['name'] ?>
-										</h3>
-										<p class="text-sm"><?php echo $value['qty'] ?> X <?php echo $value['price'] ?></p>
-										<p class="text-sm text-muted"><i class="far fa-calculator"></i><?php echo $this->cart->format_number($value['subtotal']) ?></p>
+										<tr>
+											<td colspan="2"> </td>
+											<td class="right"><strong>Total</strong></td>
+											<td class="right">Rp<?php echo $this->cart->format_number($this->cart->total()); ?></td>
+										</tr>
 									</div>
 								</div>
 							</a>
+							<div class="dropdown-divider"></div>
+							<a href="<?php echo base_url('shooping') ?>" class="dropdown-item dropdown-footer">Check Out</a>
+							<!-- <a href="<?php echo base_url('shooping/viewCart') ?>" class="dropdown-item dropdown-footer">View Cart</a> -->
 						<?php } ?>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<div class="media">
-								<div class="media-body">
-									<tr>
-										<td colspan="2"> </td>
-										<td class="right"><strong>Total</strong></td>
-										<td class="right">Rp<?php echo $this->cart->format_number($this->cart->total()); ?></td>
-									</tr>
-								</div>
-						</a>
-						<a href="<?php echo base_url('shooping') ?>" class="dropdown-item dropdown-footer">View Cart</a>
+
 					</div>
 				</li>
 				<!-- Notifications Dropdown Menu -->
