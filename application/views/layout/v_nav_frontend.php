@@ -40,86 +40,76 @@
 			<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
 				<!-- Messages Dropdown Menu -->
 				<li class="nav-item">
-					<a class="nav-link" data-toggle="dropdown" href="#">
-						</span><i class="fas fa-user"></i>
-					</a>
-					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-envelope mr-2"></i> 4 new messages
-							<span class="float-right text-muted text-sm">3 mins</span>
+					<?php if ($this->session->userdata('email') == "") { ?>
+						<a class="nav-link" href=" <?php echo base_url('pelanggan/login') ?>">Login
+							</span>
 						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-users mr-2"></i> 8 friend requests
-							<span class="float-right text-muted text-sm">12 hours</span>
+					<?php } else { ?>
+						<a class="nav-link" data-toggle="dropdown" href="#">
+							<span class="brand-text font-weight-light"><?php echo $this->session->userdata('nama_pelanggan') ?></span>
+							<img src="<?php echo base_url('assets/foto/' . $this->session->userdata('foto')) ?>" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
 						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<i class="fas fa-file mr-2"></i> 3 new reports
-							<span class="float-right text-muted text-sm">2 days</span>
-						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-					</div>
+						<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+							<div class="dropdown-divider"></div>
+							<a href="<?php echo base_url('pelanggan/akun') ?>" class="dropdown-item">
+								<i class="fas fa-user mr-2"></i> Akun Saya
+								<!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+							</a>
+							<div class="dropdown-divider"></div>
+							<a href="#" class="dropdown-item">
+								<i class="fas fa-shopping-cart mr-2"></i> Pesanan Saya
+								<!-- <span class="float-right text-muted text-sm">3 mins</span> -->
+							</a>
+							<div class="dropdown-divider"></div>
+							<a href="<?php echo base_url('pelanggan/logout') ?>" class="dropdown-item dropdown-footer">Log out</a>
+						</div>
+					<?php } ?>
 				</li>
+
+				<?php $keranjang = $this->cart->contents();
+				$jml_item = 0;
+				foreach ($keranjang as $key => $value) {
+					$jml_item = $jml_item + $value['qty'];
+				}
+				?>
 				<li class="nav-item dropdown">
 					<a class="nav-link" data-toggle="dropdown" href="#">
 						<i class="fas fa-shopping-cart"></i>
-						<span class="badge badge-danger navbar-badge">3</span>
+						<span class="badge badge-danger navbar-badge"><?php echo $jml_item ?></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
-							<div class="media">
-								<img src="<?php echo base_url() ?>template/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										Brad Diesel
-										<span class="float-right text-sm text-danger"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">Call me whenever you can...</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+						<?php foreach ($keranjang as $key => $value) { ?>
+							<!-- $item = $this->m_home->detailItem($value['id']); -->
+
+
+							<a href="#" class="dropdown-item">
+								<div class="media">
+									<!-- <img src="<?php echo base_url('assets/image/' . $item->photo) ?>" alt="User Avatar" class="img-size-50 mr-3 img-circle"> -->
+									<div class="media-body">
+										<h3 class="dropdown-item-title">
+											<?php echo $value['name'] ?>
+										</h3>
+										<p class="text-sm"><?php echo $value['qty'] ?> X <?php echo $value['price'] ?></p>
+										<p class="text-sm text-muted"><i class="far fa-calculator"></i><?php echo $this->cart->format_number($value['subtotal']) ?></p>
+									</div>
 								</div>
-							</div>
-							<!-- Message End -->
-						</a>
+							</a>
+						<?php } ?>
 						<div class="dropdown-divider"></div>
 						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
 							<div class="media">
-								<img src="<?php echo base_url() ?>template/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
 								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										John Pierce
-										<span class="float-right text-sm text-muted"><i class="fas fa-star"></i></span>
-									</h3>
-									<p class="text-sm">I got your message bro</p>
-									<p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
+									<tr>
+										<td colspan="2"> </td>
+										<td class="right"><strong>Total</strong></td>
+										<td class="right">Rp<?php echo $this->cart->format_number($this->cart->total()); ?></td>
+									</tr>
 								</div>
-							</div>
-							<!-- Message End -->
 						</a>
-						<div class="dropdown-divider"></div>
-						<a href="#" class="dropdown-item">
-							<!-- Message Start -->
-							<div class="media">
-								<img src="<?php echo base_url() ?>template/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
-								<div class="media-body">
-									<h3 class="dropdown-item-title">
-										Nora Silvester
-										<span class="float-right text-sm text-warning"><i class="fas fa-shopping-cart"></i></span>
-									</h3>
-									<p class="text-sm">The subject goes here</p>
-									<p class="text-sm text-muted"><i class="fas fa-shopping-cart"></i> 4 Hours Ago</p>
-								</div>
-							</div>
-							<!-- Message End -->
-						</a>
+						<a href="<?php echo base_url('shooping') ?>" class="dropdown-item dropdown-footer">View Cart</a>
 					</div>
 				</li>
 				<!-- Notifications Dropdown Menu -->
-
 			</ul>
 		</div>
 </nav>

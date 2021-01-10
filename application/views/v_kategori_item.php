@@ -63,7 +63,7 @@
 										<a href="#" class="btn btn-sm btn-success">
 											<i class="fas fa-eye"></i>
 										</a>
-										<a href="#" class="btn  btn-primary">
+										<a href="<?php echo base_url('shooping/add') ?>" class="btn  btn-primary">
 											<i class="fas fa-shopping-cart">Add</i>
 										</a>
 									</div>

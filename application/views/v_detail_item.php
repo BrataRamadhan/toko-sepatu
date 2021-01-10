@@ -18,34 +18,56 @@
 			<div class="col-12 col-sm-6">
 				<h3 class="my-3"><?php echo $item->item ?></h3>
 				<h4>Kategori : <?php echo $item->nama_kategori ?></h4>
-
-
+				<h4><?php echo $item->description ?></h4>
 				<div class="bg-gray py-2 px-3 mt-4">
 					<h2 class="mb-0">
 						Rp.<?php echo number_format($item->price, 0) ?>
 					</h2>
 				</div>
+				<hr>
+				<?php echo form_open('shooping/add');
+				echo form_hidden('id', $item->id_item);
+				echo form_hidden('price', $item->price);
+				echo form_hidden('name', $item->item);
+				echo form_hidden('redirect_page', str_replace('index.php/', '', current_url())); ?>
+
 
 				<div class="mt-4">
-					<div class="btn btn-primary btn-lg btn-flat">
-						<i class="fas fa-cart-plus fa-lg mr-2"></i>
-						Add to Cart
+					<div class="row">
+						<div class="col-sm-2">
+							<input type="number" class="form-control" min="1">
+						</div>
+						<div class="col-sm-8">
+							<button type="submit" name="qty" class="btn btn-primary btn-lg btn-flat swalDefaultSuccess">
+								<i class="fas fa-cart-plus fa-lg mr-2"></i>
+								Add to Cart
+							</button>
+						</div>
 					</div>
 				</div>
-
+				<?php echo form_close(); ?>
 
 			</div>
 		</div>
-		<div class="row mt-4">
-			<nav class="w-100">
-				<div class="nav nav-tabs" id="product-tab" role="tablist">
-					<a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
-				</div>
-			</nav>
-			<div class="tab-content p-3" id="nav-tabContent">
-				<div class="tab-pane fade show active" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab"> <?php echo $item->description ?></div>
-			</div>
-		</div>
+
 	</div>
 	<!-- /.card-body -->
 </div>
+<script src="<?php echo base_url() ?>template/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000
+		});
+
+		$('.swalDefaultSuccess').click(function() {
+			Toast.fire({
+				icon: 'success',
+				title: 'Pesanan Berhasil Masuk di Keranjang.'
+			})
+		});
+	});
+</script>

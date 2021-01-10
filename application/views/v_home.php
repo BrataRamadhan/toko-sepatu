@@ -20,23 +20,29 @@
 	</div>
 </div>
 <br>
-<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+<!-- <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
 	<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 	<span class="sr-only">Previous</span>
 </a>
 <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
 	<span class="carousel-control-next-icon" aria-hidden="true"></span>
 	<span class="sr-only">Next</span>
-</a>
-</div>
+</a> -->
+<!-- </div> -->
 
 <div class="card card-solid">
 	<div class="card-body pb-0">
-		<div class="row d-flex align-items-stretch">
+		<div class="row">
 			<?php foreach ($item as $key => $value) { ?>
-
-
-				<div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+				<div class="col-4">
+					<?php
+					echo form_open('shooping/add');
+					echo form_hidden('id', $value->id_item);
+					echo form_hidden('qty', 1);
+					echo form_hidden('price', $value->price);
+					echo form_hidden('name', $value->item);
+					echo form_hidden('redirect_page', str_replace('index.php/', '', current_url()));
+					?>
 					<div class="card bg-light">
 						<div class="card-header text-muted border-bottom-0">
 							<h2 class="lead"><b><?php echo $value->item ?></b></h2>
@@ -47,7 +53,7 @@
 									<p class="text-muted text-sm"><b>Kategori: </b><?php echo $value->nama_kategori ?></p>
 								</div>
 								<div class="col-5 text-center">
-									<img src="<?php echo base_url('assets/image/' . $value->photo) ?>" alt="" class="img-fluid" width="200px">
+									<img src="<?php echo base_url('assets/image/' . $value->photo) ?>" width=" 150px" height="150px">
 								</div>
 							</div>
 						</div>
@@ -63,16 +69,37 @@
 										<a href="<?php echo base_url('home/detail_barang/' . $value->id_item) ?>" class="btn btn-sm btn-success">
 											<i class="fas fa-eye"></i>
 										</a>
-										<a href="#" class="btn  btn-primary">
+										<button type="submit" class="btn  btn-primary swalDefaultSuccess">
 											<i class="fas fa-shopping-cart">Add</i>
-										</a>
+										</button>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<?php
+					form_close();
+					?>
 				</div>
 			<?php } ?>
 		</div>
 	</div>
 </div>
+<script src="<?php echo base_url() ?>template/plugins/sweetalert2/sweetalert2.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		const Toast = Swal.mixin({
+			toast: true,
+			position: 'top-end',
+			showConfirmButton: false,
+			timer: 3000
+		});
+
+		$('.swalDefaultSuccess').click(function() {
+			Toast.fire({
+				icon: 'success',
+				title: 'Pesanan Berhasil di tambahkanke  Keranjang.'
+			})
+		});
+	});
+</script>
